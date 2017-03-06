@@ -11,7 +11,7 @@ fi
 # .svn dir is exists
 if [[ ! -d $svnDir/.svn ]]; then
   echo '.svn is not dir'
-  exit 0
+  exit 1
 fi
 
 # clean unversioned file
