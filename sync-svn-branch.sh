@@ -16,15 +16,15 @@ fi
 
 # clean unversioned file
 cd $svnDir
-svn revert *
-svn cleanup --remove-unversioned
+svn revert . -R -q
+svn cleanup --remove-unversioned -q
 cd $gitDir
 
 # if has --all, or else last change
 if [[ $1 = '--all' ]]; then
     syncFile=$(git diff master.. --name-only)
 else
-    syncFile=$(git diff -1 --name-only)
+    syncFile=$(git diff HEAD HEAD^ --name-only)
 fi
 for file in $syncFile
 do
@@ -35,7 +35,7 @@ done
 cd $svnDir
 svn status
 
-read -p "svn confirm commit? (y/n)" yorn
+read -p "Do svn confirm commit? (y/n)" yorn
 if [[ $yorn = 'n' ]]; then
   exit 0
 fi
