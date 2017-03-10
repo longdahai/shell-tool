@@ -33,6 +33,7 @@ done
 
 # svn commit before check
 cd $svnDir
+svn info --show-item url
 svn status
 
 read -p "Do svn confirm commit? (y/n)" yorn
@@ -41,6 +42,9 @@ if [[ $yorn = 'n' ]]; then
 fi
 
 # svn commit
-svn add *
+for file in $syncFile
+do
+  svn add $file -q
+done
 svn commit -m "Merged $branchName"
 cd $gitDir
