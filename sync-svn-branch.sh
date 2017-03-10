@@ -44,7 +44,7 @@ fi
 # svn commit
 for file in $syncFile
 do
-  svn add $file -q
+  svn add $file -q 1>/dev/null 2>/dev/null
 done
 svn commit -m "Merged $branchName"
 cd $gitDir
