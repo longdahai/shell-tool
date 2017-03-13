@@ -32,11 +32,20 @@ else
 fi
 for file in $syncFile
 do
-  cp $file $svnDir/$file
+    newfile=$svnDir/$file
+    path=${newfile%/*}
+    if [[ ! -d $path ]]; then
+        mkdir -p $path
+    fi
+    cp $file $svnDir/$file
 done
 
 # svn commit before check
 cd $svnDir
+
+# svn add
+svn st | awk '{if ( $1 == "?") { print $2}}' | xargs svn add -q
+
 svn info --show-item url
 svn status
 
@@ -46,9 +55,5 @@ if [[ $yorn = 'n' ]]; then
 fi
 
 # svn commit
-for file in $syncFile
-do
-  svn add $file -q 1>/dev/null 2>/dev/null
-done
 svn commit -m "Merged $branchName"
 cd $gitDir
