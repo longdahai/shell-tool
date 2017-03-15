@@ -1,6 +1,6 @@
 # Linux常用shell
 
-[English](/REAMDE)
+[English](./README.md)
 
 ## sync-svn-branch.sh
 
