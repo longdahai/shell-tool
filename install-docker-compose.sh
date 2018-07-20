@@ -1,8 +1,6 @@
 #!/bin/bash
 
 apt-get install curl -y
-html=$(curl -s 'https://docs.docker.com/compose/install/')
-cmd=$(echo $html|grep -Po '<code>\s*\$.*?</code>'|head -n 1|sed -e 's/<code>//' -e 's/<\/code>//' -e 's/\$//' | sed 's/^ //;s/ $//')
-echo "run $cmd"
-eval $cmd
+
+curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose

@@ -8,7 +8,7 @@ apt-get install \
      ca-certificates \
      curl \
      gnupg2 \
-     software-properties-common
+     software-properties-common -y
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 
@@ -19,4 +19,4 @@ add-apt-repository \
 
 apt-get update
 
-apt-get install docker-ce
+apt-get install docker-ce -y
